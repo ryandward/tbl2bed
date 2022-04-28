@@ -23,9 +23,8 @@ BEGIN{
   n=0
 }
 
-
 $0~"^>"{
-
+  independent_feature_count = 0;
   f1 = match($0,/\|(.*?)\|/,chr_match);
   if(f1){chr=chr_match[1]; next}
   f2 = match($0,/ (.*?)/,chr_match);
@@ -34,13 +33,14 @@ $0~"^>"{
   next;
 }
 
-$3 && ($3 != "CDS" && $3 != "tRNA" && $3 != "ncRNA" && $3 != "rRNA") {
+$3 && ($3 != "CDS" && $3 != "tRNA" && $3 != "ncRNA" && $3 != "rRNA" && $3 != "mRNA") {
   independent_feature_count++;
   gene = ".";
   this_file = FILENAME;
   split(this_file, file_parts, ".");
   this_file = file_parts[1];
-  locus_tag = this_file"_"independent_feature_count;
+  locus_tag = chr"__"independent_feature_count;
+  gsub("\\.", "v", locus_tag)
   split(locus_tag,locus_tag_parts,"/")
   locus_tag = locus_tag_parts[length(locus_tag_parts)]
   delete(left);
