@@ -1,4 +1,4 @@
-#!/usr/bin/gawk -E
+#!/opt/homebrew/bin/gawk -E
 #Written by Ryan D. Ward
 #ryandward [_at_] gmail [_dot_] com
 #September 20, 2020
